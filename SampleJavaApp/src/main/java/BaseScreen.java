@@ -1,6 +1,8 @@
 public abstract class BaseScreen {
 
-    String username;
+    public String username;
+
+    public static final String PROJECT_NAME = "SAMPLE JAVA APP";
 
     public void setUsername(String username) {
         this.username = username;
@@ -11,5 +13,5 @@ public abstract class BaseScreen {
     public static int goBack(int number) {
         return number;
     }
-    
+
 }
