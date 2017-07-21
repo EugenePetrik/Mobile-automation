@@ -6,20 +6,32 @@ public class FirstBaseScreen extends BaseScreen {
         System.out.println("Print in console title from first base screen");
     }
 
-    public static void main(String[] args) {
-        ArrayList<String> arrayFirstBaseClass = new ArrayList<String>();
+    static ArrayList<String> arrayFirstBaseClass = new ArrayList<String>();
 
-        arrayFirstBaseClass.add("String #1 from class FirstBaseScreen");
-        arrayFirstBaseClass.add("String #2 from class FirstBaseScreen");
-        arrayFirstBaseClass.add("String #3 from class FirstBaseScreen");
-        arrayFirstBaseClass.add("String #4 from class FirstBaseScreen");
-        arrayFirstBaseClass.add(0, "String #0 from class FirstBaseScreen");
+    public static void main(String[] args) {
+
+        addString("String #1 from class FirstBaseScreen");
+        addString("String #2 from class FirstBaseScreen");
+        addString("String #3 from class FirstBaseScreen");
+        addString("String #4 from class FirstBaseScreen");
+        addString("String #5 from class FirstBaseScreen");
 
         System.out.println("Array size equals " + arrayFirstBaseClass.size());
+
+        System.out.println("The first element in array equals: \'" + getArrayValueByIndex(0) + "\'");
 
         for (String array : arrayFirstBaseClass ) {
             System.out.println("Array element equals " + array);
         }
+
+    }
+
+    private static void addString(String someString) {
+        arrayFirstBaseClass.add(someString);
+    }
+
+    private static String getArrayValueByIndex(int index) {
+        return arrayFirstBaseClass.get(index);
     }
 
 }
