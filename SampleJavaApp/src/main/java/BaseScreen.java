@@ -14,4 +14,14 @@ public abstract class BaseScreen {
         return number;
     }
 
+    public static void main(String[] args) {
+
+        new FirstBaseScreen().getTitle();
+
+        new SecondBaseScreen().getTitle();
+
+        new ThirdBaseScreen().getTitle();
+
+    }
+
 }
