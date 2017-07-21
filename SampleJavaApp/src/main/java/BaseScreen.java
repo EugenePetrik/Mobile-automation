@@ -14,6 +14,10 @@ public abstract class BaseScreen {
         return number;
     }
 
+    public static void goBack(int number, String text) {
+        System.out.println("First variable is equal: " + number + "\n. Second variable is equal: " + text);
+    }
+
     public static void main(String[] args) {
 
         new FirstBaseScreen().getTitle();
