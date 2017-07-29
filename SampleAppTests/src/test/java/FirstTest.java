@@ -72,6 +72,25 @@ public class FirstTest {
 //        }
 //
 //        MobileElement image = driver.findElement(By.xpath("//*[@resource-id=\"android:id/content\"]//android.widget.ImageView"));
+//
+//
+//
+//        // explicit wait
+//        WebDriverWait explicitWait = new WebDriverWait(driver, 30);
+//        explicitWait.until(ExpectedConditions.presenceOfElementLocated(By.id("some_id")));
+//
+//        // fluent wait
+//        Wait<WebDriver> fluentWait = new FluentWait<WebDriver>(driver)
+//                .withTimeout(30, SECONDS)
+//                .pollingEvery(5, SECONDS)
+//                .ignoring(NoSuchElementException.class);
+//
+//        WebElement element = fluentWait.until(new com.google.common.base.Function<WebDriver, WebElement>() {
+//            @Override
+//            public WebElement apply(WebDriver webDriver) {
+//                return driver.findElement(By.id("some_id"));
+//            }
+//        });
 
 
 
