@@ -78,7 +78,7 @@ public class FirstTest {
 
         // ========================== Homework ==========================
 
-        ArrayList<MobileElement> arrrayAllContacts = (ArrayList<MobileElement>) driver.findElements(By.className("android.widget.ImageView"));
+        ArrayList<MobileElement> arrrayAllContacts = (ArrayList<MobileElement>) findElementsByClassName("android.widget.ImageView");
 
         int i = 0;
 
@@ -165,7 +165,7 @@ public class FirstTest {
         MobileElement searchField = findElementById("main_search");
         searchField.sendKeys("123");
 
-        List<MobileElement> userSearchEmpty = driver.findElements(By.className("android.widget.RelativeLayout"));
+        List<MobileElement> userSearchEmpty = findElementsByClassName("android.widget.RelativeLayout");
         Assert.assertEquals(userSearchEmpty.size(), 0);
 
         MobileElement mainText = findElementById("main_text");
@@ -175,22 +175,30 @@ public class FirstTest {
 
         searchField.sendKeys("Li");
 
-        List<MobileElement> userSearchNotEmpty = driver.findElementsById("name");
+        List<MobileElement> userSearchNotEmpty = findElementsById("name");
         Assert.assertEquals(userSearchNotEmpty.size(), 2);
 
         driver.quit();
     }
 
     private static MobileElement findElementById (String id) {
-        return (MobileElement) driver.findElementById(id);
+        return driver.findElementById(id);
     }
 
     private static MobileElement findElementByXpath (String xpath) {
-        return (MobileElement) driver.findElement(By.xpath(xpath));
+        return driver.findElement(By.xpath(xpath));
     }
 
     private static MobileElement findElementByClassName (String className) {
-        return (MobileElement) driver.findElement(By.className(className));
+        return driver.findElement(By.className(className));
+    }
+
+    private static List<MobileElement> findElementsByClassName (String ClassName) {
+        return driver.findElementsByClassName(ClassName);
+    }
+
+    private static List<MobileElement> findElementsById (String Id) {
+        return driver.findElementsById(Id);
     }
 
 }
