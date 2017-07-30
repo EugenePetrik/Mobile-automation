@@ -37,7 +37,7 @@ public class FirstTestIOS {
         driver = new IOSDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), desiredCapabilities);
         driver.manage().timeouts().implicitlyWait(5, SECONDS);
 
-        ArrayList<MobileElement> arrrayAllContacts = (ArrayList<MobileElement>) findElementsByXpath("//XCUIElementTypeTable//XCUIElementTypeCell");
+        ArrayList<MobileElement> arrrayAllContacts = findElementsByXpath("//XCUIElementTypeTable//XCUIElementTypeCell");
 
         int i = 0;
 
@@ -118,7 +118,6 @@ public class FirstTestIOS {
 
             driver.navigate().back();
             i++;
-            continue;
         }
 
         MobileElement mainSearch = findElementByAccessibilityId("Search for contact");

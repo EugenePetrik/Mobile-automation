@@ -178,7 +178,6 @@ public class FirstTest {
 
             driver.navigate().back();
             i++;
-            continue;
         }
 
         MobileElement searchField = findElementById("main_search");
