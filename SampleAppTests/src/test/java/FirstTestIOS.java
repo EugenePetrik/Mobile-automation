@@ -124,15 +124,15 @@ public class FirstTestIOS {
         MobileElement mainSearch = findElementByAccessibilityId("Search for contact");
         mainSearch.setValue("123");
 
-//        List<MobileElement> userSearchEmpty = findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell");
-//        Assert.assertEquals(userSearchEmpty.size(), 0);
+        ArrayList<MobileElement> userSearchEmpty = findElementsByXpath("//XCUIElementTypeTable/XCUIElementTypeCell[@visible=\"true\"]");
+        Assert.assertEquals(userSearchEmpty.size(), 0);
 
         mainSearch.clear();
 
         mainSearch.sendKeys("Li");
 
-//        List<MobileElement> userSearchNotEmpty = findElementsByXpath("//XCUIElementTypeTable//XCUIElementTypeStaticText");
-//        Assert.assertEquals(userSearchNotEmpty.size(), 2);
+        List<MobileElement> userSearchNotEmpty = findElementsByXpath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@visible=\"true\"]");
+        Assert.assertEquals(userSearchNotEmpty.size(), 2);
 
         MobileElement firstName = findElementByAccessibilityId("Lily Barnhill");
         MobileElement secondName = findElementByAccessibilityId("Philippe Meyerson");
