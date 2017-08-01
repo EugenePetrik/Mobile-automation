@@ -1,6 +1,5 @@
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
@@ -160,3 +159,85 @@ public class FirstTestIOS {
     }
 
 }
+
+//    @Test(description = "Search")
+//    public void testSearch() throws Exception {
+//        MobileElement searchField;
+//        searchField = platform.equals(Platform.ANDROID) ? driver.findElement(By.id("main_search")) : driver.findElement(By.id("ID_ON_IOS"));
+//        searchField.setValue("Joy S");
+//        Assert.assertFalse(false);
+//    }
+//
+//    @Test(description = "Click to name")
+//    public void someOtherTest() throws Exception {
+//        List<MobileElement> name = driver.findElements(By.id("name"));
+//        Assert.assertEquals(name.size(), 1);
+//
+//        for (MobileElement element : name) {
+//            if (element.getText().equals("Joy Stclair")) {
+//                element.click();
+//            }
+//        }
+//
+//        driver.findElement(By.xpath("//*[@resource-id='android:id/content']//android.widget.ImageView"));
+//        driver.findElement(By.className("android.widget.ImageView"));
+//    }
+//
+//
+//
+//
+//    public static void main(String[] args) throws MalformedURLException {
+//
+//        MobileElement searchField = driver.findElement(By.id("main_search"));   // driver.findElementById("main_search");
+//        searchField.setValue("Joy S");                                          // searchField.sendKeys("Joy S");
+//
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//
+//
+//        MobileElement elementByXpath = driver.findElementByXPath("//android.widget.TextView[@resource-id=\"com.jayway.contacts:id/name\"]");
+//        elementByXpath.click();
+//
+//        String email = findElementById("email").getText();
+//
+//        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);    // explicit wait
+//        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.id("email")));
+//        System.out.println(email.equals("alstclair11@yopmail.com"));
+//
+//
+//
+//
+//        List<MobileElement> name = driver.findElements(By.id("name"));
+//        Assert.assertEquals(name.size(), 1);    // Assert.assertTrue(name.size() == 1);
+//
+//        for (MobileElement element : name) {
+//            element.getText().equals("Joy Stclair");
+//            element.click();
+//        }
+//
+//        MobileElement image = driver.findElement(By.xpath("//*[@resource-id=\"android:id/content\"]//android.widget.ImageView"));
+//
+//
+//
+//        // explicit wait
+//        WebDriverWait explicitWait = new WebDriverWait(driver, 30);
+//        explicitWait.until(ExpectedConditions.presenceOfElementLocated(By.id("some_id")));
+//
+//        // fluent wait
+//        Wait<WebDriver> fluentWait = new FluentWait<WebDriver>(driver)
+//                .withTimeout(30, SECONDS)
+//                .pollingEvery(5, SECONDS)
+//                .ignoring(NoSuchElementException.class);
+//
+//        WebElement element = fluentWait.until(new com.google.common.base.Function<WebDriver, WebElement>() {
+//            @Override
+//            public WebElement apply(WebDriver webDriver) {
+//                return driver.findElement(By.id("some_id"));
+//            }
+//        });
+//    }
