@@ -195,7 +195,7 @@ public class FirstTest extends AbstractTest {
 
             mainSearch.clear();
 
-            findElementByXpath("//XCUIElementTypeOther/XCUIElementTypeButton[@name=\"Cancel\"]");
+            findElementByAccessibilityId("Cancel").click();
 
         }
     }
@@ -229,7 +229,7 @@ public class FirstTest extends AbstractTest {
 
             mainSearch.clear();
 
-            findElementByXpath("//XCUIElementTypeOther/XCUIElementTypeButton[@name=\"Cancel\"]");
+            findElementByAccessibilityId("Cancel").click();
 
         }
 
