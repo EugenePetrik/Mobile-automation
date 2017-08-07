@@ -1,266 +1,234 @@
+import enums.Platform;
 import io.appium.java_client.MobileElement;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pageobjects.BasePage;
+import pageobjects.ContactDetailsPage;
+import pageobjects.ContactsListPage;
 
 import java.util.ArrayList;
 
-public class FirstTest extends AbstractTest {
+public class FirstTest extends BaseTest {
 
-    @Test(description = "Find five elements")
-    public void testFindFiveElements() throws Exception {
+    @Test(description = "Find name")
+    public void testSearch() throws Exception {
+        boolean searchSuccessful = new ContactsListPage(driver)
+                .searchByName("Byron Workman")
+                .isSearchSuccessful();
+        Assert.assertTrue(searchSuccessful);
+    }
 
-        if (platform.equals(Platform.ANDROID)) {
+    @Test(description = "Select contact with specific name")
+    public void testFindContactByName() throws Exception {
+        ContactDetailsPage findContactByName = new ContactsListPage(driver)
+                .searchByName("Byron Workman")
+                .clickToFirstName();
 
-            ArrayList<MobileElement> arrrayAllContacts = findElementsByClassName("android.widget.ImageView");
+        Assert.assertEquals(findContactByName.getUserDetailName(), "Byron Workman");
 
-            int i = 0;
-
-            for (MobileElement arrayElement : arrrayAllContacts) {
-
-                if (i == 5) break;
-
-                arrayElement.click();
-
-                String detailName = findElementById("detail_name").getText();
-
-                MobileElement userImage = findElementByClassName("android.widget.ImageView");
-                MobileElement userPhone = findElementById("phonenumber");
-                MobileElement userEmail = findElementByXpath("//*[@resource-id=\"android:id/content\"]//*[@resource-id=\"com.jayway.contacts:id/email\"]");
-                MobileElement userFirstAddress = findElementById("street1");
-                MobileElement userSecondAddress = findElementById("street2");
-
-                switch (detailName) {
-
-                    case "Jenny Cherry" : {
-                        Assert.assertTrue(userImage.isDisplayed());
-                        Assert.assertEquals(userPhone.getText(), "+1(959)-1775994");
-                        Assert.assertEquals(userEmail.getText(), "jqjenny16@yopmail.com");
-                        Assert.assertEquals(userFirstAddress.getText(), "201 Metz Bates");
-                        Assert.assertEquals(userSecondAddress.getText(), "15840 New York");
-                        break;
-                    }
-
-                    case "Garance Epperson" : {
-                        Assert.assertTrue(userImage.isDisplayed());
-                        Assert.assertEquals(userPhone.getText(), "+1(747)-8330134");
-                        Assert.assertEquals(userEmail.getText(), "duepperson20@gmail.com");
-                        Assert.assertEquals(userFirstAddress.getText(), "542 American Circle");
-                        Assert.assertEquals(userSecondAddress.getText(), "49100 Washington");
-                        break;
-                    }
-
-                    case "Nadia Patten" : {
-                        Assert.assertTrue(userImage.isDisplayed());
-                        Assert.assertEquals(userPhone.getText(), "+1(131)-9550402");
-                        Assert.assertEquals(userEmail.getText(), "jnnadia13@gmail.com");
-                        Assert.assertEquals(userFirstAddress.getText(), "791 Bombardier Court");
-                        Assert.assertEquals(userSecondAddress.getText(), "93809 New York");
-                        break;
-                    }
-
-                    case "Jennifer Krantz" : {
-                        Assert.assertTrue(userImage.isDisplayed());
-                        Assert.assertEquals(userPhone.getText(), "+1(656)-6779916");
-                        Assert.assertEquals(userEmail.getText(), "eekrantz4@yopmail.com");
-                        Assert.assertEquals(userFirstAddress.getText(), "413 Wescam Drive");
-                        Assert.assertEquals(userSecondAddress.getText(), "43115 Miami");
-                        break;
-                    }
-
-                    case "Christin Steinberg" : {
-                        Assert.assertTrue(userImage.isDisplayed());
-                        Assert.assertEquals(userPhone.getText(), "+1(656)-1115633");
-                        Assert.assertEquals(userEmail.getText(), "awchristin22@yahoo.com");
-                        Assert.assertEquals(userFirstAddress.getText(), "412 Barfield Trail");
-                        Assert.assertEquals(userSecondAddress.getText(), "53713 Houston");
-                        break;
-                    }
-
-                    default : {
-                        System.out.println("I didn't find this element");
-                        break;
-                    }
-
-                }
-
-                driver.navigate().back();
-                i++;
-            }
-
-        } else if (platform.equals(Platform.IOS)) {
-
-            ArrayList<MobileElement> arrrayAllContacts = findElementsByXpath("//XCUIElementTypeTable//XCUIElementTypeCell");
-
-            int i = 0;
-
-            for (MobileElement arrayElement : arrrayAllContacts) {
-
-                if (i == 5) break;
-
-                arrayElement.click();
-
-                String detailName = findElementByXpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[1]").getText();
-
-                MobileElement userImage = findElementByAccessibilityId("contact_details");
-                MobileElement userPhone = findElementByXpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[3]");
-                MobileElement userEmail = findElementByXpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[5]");
-                MobileElement userFirstAddress = findElementByXpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[7]");
-                MobileElement userSecondAddress = findElementByXpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[8]");
-
-                switch (detailName) {
-
-                    case "Byron Workman" : {
-                        Assert.assertTrue(userImage.isDisplayed());
-                        Assert.assertEquals(userPhone.getText(), "+1(656)-6779916");
-                        Assert.assertEquals(userEmail.getText(), "ggbyron6@yopmail.com");
-                        Assert.assertEquals(userFirstAddress.getText(), "413 Wescam Drive");
-                        Assert.assertEquals(userSecondAddress.getText(), "43115 Miami");
-                        break;
-                    }
-
-                    case "Chris Heavener" : {
-                        Assert.assertTrue(userImage.isDisplayed());
-                        Assert.assertEquals(userPhone.getText(), "+1(959)-1775994");
-                        Assert.assertEquals(userEmail.getText(), "ischris18@outlook.com");
-                        Assert.assertEquals(userFirstAddress.getText(), "201 Metz Bates");
-                        Assert.assertEquals(userSecondAddress.getText(), "15840 New York");
-                        break;
-                    }
-
-                    case "Christin Steinberg" : {
-                        Assert.assertTrue(userImage.isDisplayed());
-                        Assert.assertEquals(userPhone.getText(), "+1(656)-1115633");
-                        Assert.assertEquals(userEmail.getText(), "awchristin22@yahoo.com");
-                        Assert.assertEquals(userFirstAddress.getText(), "412 Barfield Trail");
-                        Assert.assertEquals(userSecondAddress.getText(), "53713 Houston");
-                        break;
-                    }
-
-                    case "Dulcie Moller" : {
-                        Assert.assertTrue(userImage.isDisplayed());
-                        Assert.assertEquals(userPhone.getText(), "+1(555)-9779202");
-                        Assert.assertEquals(userEmail.getText(), "eimoller8@yopmail.com");
-                        Assert.assertEquals(userFirstAddress.getText(), "52 Woodside Way");
-                        Assert.assertEquals(userSecondAddress.getText(), "58193 New Jersey");
-                        break;
-                    }
-
-                    case "Duane Cedillo" : {
-                        Assert.assertTrue(userImage.isDisplayed());
-                        Assert.assertEquals(userPhone.getText(), "+1(141)-1779583");
-                        Assert.assertEquals(userEmail.getText(), "hxduane23@gmail.com");
-                        Assert.assertEquals(userFirstAddress.getText(), "438 Ethels Lane");
-                        Assert.assertEquals(userSecondAddress.getText(), "24456 Houston");
-                        break;
-                    }
-
-                    default : {
-                        System.out.println("I didn't find this element");
-                        break;
-                    }
-
-                }
-
-                driver.navigate().back();
-                i++;
-            }
-        }
+        findContactByName.returnBack();
     }
 
     @Test(description = "Negative Search")
     public void negativeSearch() throws Exception {
 
-        if (platform.equals(Platform.ANDROID)) {
+        if (BasePage.platform.equals(Platform.ANDROID)) {
 
-            MobileElement searchField = findElementById("main_search");
-            searchField.sendKeys("123");
+            ArrayList<MobileElement> allNames = new ContactsListPage(driver)
+                    .searchByName("123")
+                    .getAllActiveNames();
 
-            ArrayList<MobileElement> userSearchEmpty = findElementsByClassName("android.widget.RelativeLayout");
-            Assert.assertEquals(userSearchEmpty.size(), 0);
+            Assert.assertEquals(allNames.size(), 0);
 
-            MobileElement mainText = findElementById("main_text");
-            Assert.assertEquals(mainText.getText(), "No contacts found with \"123\" in the name");
+            Assert.assertEquals(new ContactsListPage(driver)
+                    .getErorrMessageText(), "No contacts found with \"123\" in the name");
 
-            searchField.clear();
+            new ContactsListPage(driver).clearSearch();
 
-        } else if (platform.equals(Platform.IOS)) {
 
-            MobileElement mainSearch = findElementByAccessibilityId("Search for contact");
-            mainSearch.setValue("123");
+        } else if (BasePage.platform.equals(Platform.IOS)) {
 
-            ArrayList<MobileElement> userSearchEmpty = findElementsByXpath("//XCUIElementTypeTable/XCUIElementTypeCell[@visible=\"true\"]");
-            Assert.assertEquals(userSearchEmpty.size(), 0);
+            ArrayList<MobileElement> allNames = new ContactsListPage(driver)
+                    .searchByName("123")
+                    .getAllActiveNames();
 
-            mainSearch.clear();
+            Assert.assertEquals(allNames.size(), 0);
 
-            findElementByAccessibilityId("Cancel").click();
+            new ContactsListPage(driver).clickTheButtonCancel();
 
         }
+
     }
 
     @Test(description = "Positive Search")
     public void positiveSearch() {
 
-        if (platform.equals(Platform.ANDROID)) {
+        if (BasePage.platform.equals(Platform.ANDROID)) {
 
-            MobileElement searchField = findElementById("main_search");
-            searchField.sendKeys("Li");
+            ArrayList<MobileElement> allNames = new ContactsListPage(driver)
+                    .searchByName("Li")
+                    .getAllActiveNames();
 
-            ArrayList<MobileElement> userSearchNotEmpty = findElementsById("name");
-            Assert.assertEquals(userSearchNotEmpty.size(), 2);
+            Assert.assertEquals(allNames.size(), 2);
 
-            searchField.clear();
+            Assert.assertEquals(new ContactsListPage(driver).selectContact("Lily Barnhill"), "Lily Barnhill");
+            Assert.assertEquals(new ContactsListPage(driver).selectContact("Philippe Meyerson"), "Philippe Meyerson");
 
-        } else if (platform.equals(Platform.IOS)) {
+            new ContactsListPage(driver).clearSearch();
 
-            MobileElement mainSearch = findElementByAccessibilityId("Search for contact");
-            mainSearch.setValue("Li");
+        } else if (BasePage.platform.equals(Platform.IOS)) {
 
-            ArrayList<MobileElement> userSearchNotEmpty = findElementsByXpath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@visible=\"true\"]");
-            Assert.assertEquals(userSearchNotEmpty.size(), 2);
+            ArrayList<MobileElement> allNames = new ContactsListPage(driver)
+                    .searchByName("Li")
+                    .getAllActiveNames();
 
-            MobileElement firstName = findElementByAccessibilityId("Lily Barnhill");
-            MobileElement secondName = findElementByAccessibilityId("Philippe Meyerson");
+            Assert.assertEquals(allNames.size(), 2);
 
-            Assert.assertEquals(firstName.getText(), "Lily Barnhill");
-            Assert.assertEquals(secondName.getText(), "Philippe Meyerson");
+            Assert.assertEquals(new ContactsListPage(driver).selectContact("Lily Barnhill"), "Lily Barnhill");
+            Assert.assertEquals(new ContactsListPage(driver).selectContact("Philippe Meyerson"), "Philippe Meyerson");
 
-            mainSearch.clear();
-
-            findElementByAccessibilityId("Cancel").click();
+            new ContactsListPage(driver).clickTheButtonCancel();
 
         }
 
     }
 
-    private static MobileElement findElementByClassName (String className) {
-        return driver.findElement(By.className(className));
-    }
+    @Test(description = "Find five elements")
+    public void testFindFiveElements() throws Exception {
 
-    private static ArrayList<MobileElement> findElementsByClassName (String ClassName) {
-        return (ArrayList<MobileElement>) driver.findElementsByClassName(ClassName);
-    }
+        ContactsListPage contactsListPage = new ContactsListPage(driver);
 
-    private static MobileElement findElementByXpath (String xpath) {
-        return driver.findElement(By.xpath(xpath));
-    }
+        if (BasePage.platform.equals(Platform.ANDROID)) {
 
-    private static ArrayList<MobileElement> findElementsByXpath (String xpath) {
-        return (ArrayList<MobileElement>) driver.findElementsByXPath(xpath);
-    }
+            for (int i = 0; i < 5; i++) {
 
-    private static MobileElement findElementById (String id) {
-        return driver.findElementById(id);
-    }
+                contactsListPage.getAllActiveNames().get(i).click();
 
-    private static ArrayList<MobileElement> findElementsById (String Id) {
-        return (ArrayList<MobileElement>) driver.findElementsById(Id);
-    }
+                ContactDetailsPage contactDetailsPage = new ContactDetailsPage(driver);
 
-    private static MobileElement findElementByAccessibilityId (String id) {
-        return driver.findElementByAccessibilityId(id);
+                switch (contactDetailsPage.getUserDetailName()) {
+
+                    case "Jenny Cherry": {
+                        Assert.assertTrue(contactDetailsPage.isUserImageDisplayed());
+                        Assert.assertEquals(contactDetailsPage.getUserPhone(), "+1(959)-1775994");
+                        Assert.assertEquals(contactDetailsPage.getUserEmail(), "jqjenny16@yopmail.com");
+                        Assert.assertEquals(contactDetailsPage.getUserFirstAddress(), "201 Metz Bates");
+                        Assert.assertEquals(contactDetailsPage.getUserSecondAddress(), "15840 New York");
+                        break;
+                    }
+
+                    case "Garance Epperson": {
+                        Assert.assertTrue(contactDetailsPage.isUserImageDisplayed());
+                        Assert.assertEquals(contactDetailsPage.getUserPhone(), "+1(747)-8330134");
+                        Assert.assertEquals(contactDetailsPage.getUserEmail(), "duepperson20@gmail.com");
+                        Assert.assertEquals(contactDetailsPage.getUserFirstAddress(), "542 American Circle");
+                        Assert.assertEquals(contactDetailsPage.getUserSecondAddress(), "49100 Washington");
+                        break;
+                    }
+
+                    case "Nadia Patten": {
+                        Assert.assertTrue(contactDetailsPage.isUserImageDisplayed());
+                        Assert.assertEquals(contactDetailsPage.getUserPhone(), "+1(131)-9550402");
+                        Assert.assertEquals(contactDetailsPage.getUserEmail(), "jnnadia13@gmail.com");
+                        Assert.assertEquals(contactDetailsPage.getUserFirstAddress(), "791 Bombardier Court");
+                        Assert.assertEquals(contactDetailsPage.getUserSecondAddress(), "93809 New York");
+                        break;
+                    }
+
+                    case "Jennifer Krantz": {
+                        Assert.assertTrue(contactDetailsPage.isUserImageDisplayed());
+                        Assert.assertEquals(contactDetailsPage.getUserPhone(), "+1(656)-6779916");
+                        Assert.assertEquals(contactDetailsPage.getUserEmail(), "eekrantz4@yopmail.com");
+                        Assert.assertEquals(contactDetailsPage.getUserFirstAddress(), "413 Wescam Drive");
+                        Assert.assertEquals(contactDetailsPage.getUserSecondAddress(), "43115 Miami");
+                        break;
+                    }
+
+                    case "Christin Steinberg": {
+                        Assert.assertTrue(contactDetailsPage.isUserImageDisplayed());
+                        Assert.assertEquals(contactDetailsPage.getUserPhone(), "+1(656)-1115633");
+                        Assert.assertEquals(contactDetailsPage.getUserEmail(), "awchristin22@yahoo.com");
+                        Assert.assertEquals(contactDetailsPage.getUserFirstAddress(), "412 Barfield Trail");
+                        Assert.assertEquals(contactDetailsPage.getUserSecondAddress(), "53713 Houston");
+                        break;
+                    }
+
+                    default: {
+                        System.out.println("I didn't find this element");
+                        break;
+                    }
+
+                }
+
+                contactDetailsPage.returnBack();
+
+            }
+        } else if (BasePage.platform.equals(Platform.IOS)) {
+
+            for (int i = 0; i < 5; i++) {
+
+                contactsListPage.getAllNames().get(i).click();
+
+                ContactDetailsPage contactDetailsPage = new ContactDetailsPage(driver);
+
+                switch (contactDetailsPage.getUserDetailName()) {
+
+                    case "Byron Workman" : {
+                        Assert.assertTrue(contactDetailsPage.isUserImageDisplayed());
+                        Assert.assertEquals(contactDetailsPage.getUserPhone(), "+1(656)-6779916");
+                        Assert.assertEquals(contactDetailsPage.getUserEmail(), "ggbyron6@yopmail.com");
+                        Assert.assertEquals(contactDetailsPage.getUserFirstAddress(), "413 Wescam Drive");
+                        Assert.assertEquals(contactDetailsPage.getUserSecondAddress(), "43115 Miami");
+                        break;
+                    }
+
+                    case "Chris Heavener" : {
+                        Assert.assertTrue(contactDetailsPage.isUserImageDisplayed());
+                        Assert.assertEquals(contactDetailsPage.getUserPhone(), "+1(959)-1775994");
+                        Assert.assertEquals(contactDetailsPage.getUserEmail(), "ischris18@outlook.com");
+                        Assert.assertEquals(contactDetailsPage.getUserFirstAddress(), "201 Metz Bates");
+                        Assert.assertEquals(contactDetailsPage.getUserSecondAddress(), "15840 New York");
+                        break;
+                    }
+
+                    case "Christin Steinberg" : {
+                        Assert.assertTrue(contactDetailsPage.isUserImageDisplayed());
+                        Assert.assertEquals(contactDetailsPage.getUserPhone(), "+1(656)-1115633");
+                        Assert.assertEquals(contactDetailsPage.getUserEmail(), "awchristin22@yahoo.com");
+                        Assert.assertEquals(contactDetailsPage.getUserFirstAddress(), "412 Barfield Trail");
+                        Assert.assertEquals(contactDetailsPage.getUserSecondAddress(), "53713 Houston");
+                        break;
+                    }
+
+                    case "Dulcie Moller" : {
+                        Assert.assertTrue(contactDetailsPage.isUserImageDisplayed());
+                        Assert.assertEquals(contactDetailsPage.getUserPhone(), "+1(555)-9779202");
+                        Assert.assertEquals(contactDetailsPage.getUserEmail(), "eimoller8@yopmail.com");
+                        Assert.assertEquals(contactDetailsPage.getUserFirstAddress(), "52 Woodside Way");
+                        Assert.assertEquals(contactDetailsPage.getUserSecondAddress(), "58193 New Jersey");
+                        break;
+                    }
+
+                    case "Duane Cedillo" : {
+                        Assert.assertTrue(contactDetailsPage.isUserImageDisplayed());
+                        Assert.assertEquals(contactDetailsPage.getUserPhone(), "+1(141)-1779583");
+                        Assert.assertEquals(contactDetailsPage.getUserEmail(), "hxduane23@gmail.com");
+                        Assert.assertEquals(contactDetailsPage.getUserFirstAddress(), "438 Ethels Lane");
+                        Assert.assertEquals(contactDetailsPage.getUserSecondAddress(), "24456 Houston");
+                        break;
+                    }
+
+                    default : {
+                        System.out.println("I didn't find this element");
+                        break;
+                    }
+
+                }
+
+                contactDetailsPage.returnBack();
+
+            }
+        }
     }
 
 }

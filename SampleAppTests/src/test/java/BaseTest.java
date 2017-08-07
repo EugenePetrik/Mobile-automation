@@ -1,3 +1,4 @@
+import enums.Platform;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -11,16 +12,27 @@ import org.testng.annotations.BeforeTest;
 import java.io.File;
 import java.net.URL;
 
+import static enums.Platform.ANDROID;
+import static enums.Platform.IOS;
 import static java.util.concurrent.TimeUnit.SECONDS;
+import static pageobjects.BasePage.platform;
 
-public class AbstractTest {
+public class BaseTest {
 
-    public static AppiumDriver<MobileElement> driver;
-    protected static Platform platform = Platform.IOS;
+    static {
+        setPlatform();
+    }
 
-    enum Platform {
-        ANDROID,
-        IOS
+    static AppiumDriver<MobileElement> driver;
+
+    private static void setPlatform() {
+        String platformVal = System.getProperty("platform");
+
+        if (platformVal != null) {
+            platform = platformVal.contains("ios") ? IOS : ANDROID;
+        } else {
+            platform = IOS;
+        }
     }
 
     @BeforeTest
@@ -36,6 +48,7 @@ public class AbstractTest {
             desiredCapabilities.setCapability(MobileCapabilityType.UDID, "F678F40D-B14D-4252-B1AD-1997CBB7DF11");
             desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.3");
             desiredCapabilities.setCapability(MobileCapabilityType.APP, app);
+            desiredCapabilities.setCapability(MobileCapabilityType.NO_RESET, true);
             desiredCapabilities.setCapability("newCommandTimeout", 300);
 
             driver = new IOSDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), desiredCapabilities);
@@ -59,7 +72,7 @@ public class AbstractTest {
     }
 
     @AfterTest
-    public void quiteDriver() throws Exception {
+    public void tearDown() throws Exception {
         driver.quit();
     }
 
