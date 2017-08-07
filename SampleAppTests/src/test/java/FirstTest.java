@@ -15,7 +15,15 @@ public class FirstTest extends BaseTest {
         boolean searchSuccessful = new ContactsListPage(driver)
                 .searchByName("Byron Workman")
                 .isSearchSuccessful();
+
         Assert.assertTrue(searchSuccessful);
+
+        if (BasePage.platform.equals(Platform.ANDROID)) {
+            new ContactsListPage(driver).clearSearch();
+        } else if (BasePage.platform.equals(Platform.IOS)) {
+            new ContactsListPage(driver).clickTheButtonCancel();
+        }
+
     }
 
     @Test(description = "Select contact with specific name")
@@ -25,6 +33,13 @@ public class FirstTest extends BaseTest {
                 .clickToFirstName();
 
         Assert.assertEquals(findContactByName.getUserDetailName(), "Byron Workman");
+
+        if (BasePage.platform.equals(Platform.ANDROID)) {
+            findContactByName.returnBack();
+        } else if (BasePage.platform.equals(Platform.IOS)) {
+            findContactByName.returnBack();
+            new ContactsListPage(driver).clickTheButtonCancel();
+        }
 
         findContactByName.returnBack();
     }
