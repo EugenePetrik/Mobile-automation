@@ -1,7 +1,7 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageobjects.MainPage;
-import pageobjects.SettingsPage;
+import pageobjects.native_app.MainPage;
+import pageobjects.native_app.SettingsPage;
 
 public class FirstTest extends BaseTest {
 

@@ -1,10 +1,9 @@
-package pageobjects;
+package pageobjects.native_app;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSFindBy;
-import sun.applet.Main;
 
 public class MainPage extends BasePage {
 
@@ -51,21 +50,13 @@ public class MainPage extends BasePage {
     public boolean getTipAmount(String name) {
         String tip = tipAmount.getText();
 
-        if (tip.equals(name)) {
-            return true;
-        } else {
-            return false;
-        }
+        return tip.equals(name);
     }
 
     public boolean getTotalAmount(String name) {
         String amount = totalAmount.getText();
 
-        if (amount.equals(name)) {
-            return true;
-        } else {
-            return false;
-        }
+        return amount.equals(name);
     }
 
     public SettingsPage clickToSettings() {
